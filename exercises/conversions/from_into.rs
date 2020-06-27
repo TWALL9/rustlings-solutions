@@ -34,10 +34,11 @@ impl Default for Person {
 // Otherwise, then return an instantiated Person object with the results
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
-        if s.len() == 0 {
+        let tokens: Vec<&str> = s.split(",").collect();
+
+        if tokens[0].len() == 0 || tokens.len() < 2 {
             Person::default()
         } else {
-            let tokens: Vec<&str> = s.split(",").collect();
             match tokens[1].parse::<usize>() {
                 Ok(age) => Person{name: String::from(tokens[0]), age: age},
                 Err(_) => Person::default()

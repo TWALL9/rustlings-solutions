@@ -26,9 +26,14 @@ impl FromStr for Person {
             Err(String::from("0 len"))
         } else {
             let tokens: Vec<&str> = s.split(",").collect();
-            match tokens[1].parse::<usize>() {
-                Ok(age) => Ok(Person{name: String::from(tokens[0]), age: age}),
-                Err(_) => Err(String::from("bad age"))
+            
+            if tokens[0] == "" {
+                return Err(String::from("bad name"))
+            } else {
+                match tokens[1].parse::<usize>() {
+                    Ok(age) => Ok(Person{name: String::from(tokens[0]), age: age}),
+                    Err(_) => Err(String::from("bad age"))
+                }
             }
         }
     }

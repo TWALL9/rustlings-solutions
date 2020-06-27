@@ -4,7 +4,7 @@
 enum Message {
     ChangeColor(u8, u8, u8),
     Echo(String),
-    Move{x: u8, y: u8},
+    Move(Point),
     Quit
 }
 
@@ -40,7 +40,7 @@ impl State {
         match message {
             Message::ChangeColor(r,g,b) => State::change_color(self, (r,g,b)),
             Message::Echo(s) => State::echo(self, s),
-            Message::Move{x, y} => State::move_position(self, Point{x, y}),
+            Message::Move(p) => State::move_position(self, p),
             Message::Quit => State::quit(self)
         }
     }
